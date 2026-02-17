@@ -2,7 +2,10 @@ package com.tamasferencz.booking_api.service;
 
 import com.tamasferencz.booking_api.entity.Event;
 import com.tamasferencz.booking_api.repository.EventRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +14,7 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    public EventService(EventRepository eventRepository){
+    public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
@@ -19,27 +22,37 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public List<Event> getAllEvents(){
+    public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
 
-    public Optional<Event> getEventById(Long id){
-        return eventRepository.findById(id);
+    public Optional<Event> getEventById(Long id) {
+        return Optional.of(eventRepository.findById(id).orElseThrow(() -> new EventNotFound("Event with id %d not found.".formatted(id))));
     }
 
+    @Transactional
     public Optional<Event> updateEvent(Long id, Event updatedEvent) {
-        return eventRepository.findById(id)
-                .map(existingEvent -> {
-                    existingEvent.setName(updatedEvent.getName());
-                    existingEvent.setLocation(updatedEvent.getLocation());
-                    existingEvent.setDate(updatedEvent.getDate());
-                    existingEvent.setTotalSeats(updatedEvent.getTotalSeats());
+        //Load event
+        var event = eventRepository.findById(id);
+        if (event.isEmpty()) {
+            throw new EventNotFound("Event with id %d not found!".formatted(id));
+        }
 
-                    return eventRepository.save(existingEvent);
-                });
+        return event.map(existingEvent -> {
+            existingEvent.setName(updatedEvent.getName());
+            existingEvent.setLocation(updatedEvent.getLocation());
+            existingEvent.setDate(updatedEvent.getDate());
+            existingEvent.setTotalSeats(updatedEvent.getTotalSeats());
+
+            return eventRepository.save(existingEvent);
+        });
     }
 
-    public void deleteEvent(Long id){
+    public void deleteEvent(Long id) {
+        var event = eventRepository.findById(id);
+        if (event.isEmpty()) {
+            throw new EventNotFound("Event with id %d not found!".formatted(id));
+        }
         eventRepository.deleteById(id);
     }
 }
