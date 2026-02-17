@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/events")
@@ -29,5 +30,23 @@ public class EventController {
     @GetMapping
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Event> getEventById(@PathVariable Long id){
+        return eventService.getEventById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event updatedEvent) {
+        return eventService.updateEvent(id, updatedEvent)
+                .map(event -> ResponseEntity.ok(event)) // Ha sikerült: 200 OK és a friss adat
+                .orElse(ResponseEntity.notFound().build()); // Ha nincs ilyen ID: 404 Not Found
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 }
