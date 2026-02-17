@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.tamasferencz.booking_api.BookingApiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-17T14:46:58.945Z" hostname="Tamass-MacBook-Air-2.local" time="0.276">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.tamasferencz.booking_api.BookingApiApplicationTests" time="0.276"/>
+  <system-out><![CDATA[15:46:57.494 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.tamasferencz.booking_api.BookingApiApplicationTests]: BookingApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:46:57.528 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.tamasferencz.booking_api.BookingApiApplication for test class com.tamasferencz.booking_api.BookingApiApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.8)
+
+2026-02-17T15:46:57.653+01:00  INFO 4567 --- [booking-api] [    Test worker] c.t.b.BookingApiApplicationTests         : Starting BookingApiApplicationTests using Java 21.0.10 with PID 4567 (started by tamas in /Users/tamas/event-booking-api)
+2026-02-17T15:46:57.653+01:00  INFO 4567 --- [booking-api] [    Test worker] c.t.b.BookingApiApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-02-17T15:46:57.921+01:00  INFO 4567 --- [booking-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-17T15:46:57.939+01:00  INFO 4567 --- [booking-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 1 JPA repository interface.
+2026-02-17T15:46:58.088+01:00  INFO 4567 --- [booking-api] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-17T15:46:58.106+01:00  INFO 4567 --- [booking-api] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.9.Final
+2026-02-17T15:46:58.116+01:00  INFO 4567 --- [booking-api] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-17T15:46:58.197+01:00  INFO 4567 --- [booking-api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-17T15:46:58.205+01:00  INFO 4567 --- [booking-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-17T15:46:58.265+01:00  INFO 4567 --- [booking-api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testDb user=EVENTBOOKING
+2026-02-17T15:46:58.267+01:00  INFO 4567 --- [booking-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-17T15:46:58.276+01:00  WARN 4567 --- [booking-api] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-17T15:46:58.570+01:00  INFO 4567 --- [booking-api] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-17T15:46:58.601+01:00  INFO 4567 --- [booking-api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-17T15:46:58.777+01:00  WARN 4567 --- [booking-api] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-17T15:46:58.909+01:00  INFO 4567 --- [booking-api] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testDb'
+2026-02-17T15:46:58.940+01:00  INFO 4567 --- [booking-api] [    Test worker] c.t.b.BookingApiApplicationTests         : Started BookingApiApplicationTests in 1.361 seconds (process running for 1.771)
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/tamas/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.18/417558ea01fe9f0e8a94af28b9469d281c4e3984/byte-buddy-agent-1.14.18.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
