@@ -32,7 +32,7 @@ public class EventService {
 
     @Transactional
     public Optional<Event> updateEvent(Long id, Event updatedEvent) {
-        //Load event
+
         var event = eventRepository.findById(id);
         if (event.isEmpty()) {
             throw new EventNotFound("Event with id %d not found!".formatted(id));
@@ -55,4 +55,8 @@ public class EventService {
         }
         eventRepository.deleteById(id);
     }
+
+    /*public Optional<Event> findEventsByLocation(String location){
+        //var event = eventRepository.findBy();
+    }*/
 }
