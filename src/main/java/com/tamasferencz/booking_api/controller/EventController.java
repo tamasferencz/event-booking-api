@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/events")
@@ -106,6 +107,24 @@ public class EventController {
 
         eventService.deleteEvent(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // --- 6. FIND BY LOCATION (GET) ---
+    @Operation(
+            summary = "Get events by location",
+            description = "Retrieves a list of events happening at a specific location."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of events retrieved successfully (can be empty if none found)")
+    })
+    @GetMapping("/location/{location}")
+    public ResponseEntity<Optional<Event>> getEventsByLocation(
+            @Parameter(description = "Location of the events to retrieve", example = "Budapest")
+            @PathVariable String location) {
+
+        Optional<Event> events = eventService.getEventsByLocation(location);
+
+        return ResponseEntity.ok(events);
     }
 }
 

@@ -5,7 +5,6 @@ import com.tamasferencz.booking_api.repository.EventRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +55,13 @@ public class EventService {
         eventRepository.deleteById(id);
     }
 
-    /*public Optional<Event> findEventsByLocation(String location){
-        //var event = eventRepository.findBy();
-    }*/
+    public Optional<Event> getEventsByLocation(String location){
+        var event = eventRepository.findByLocation(location);
+
+        if(event.isEmpty()){
+            throw new EventNotFound("Event with location %s not found!".formatted(location));
+        }
+
+        return event;
+    }
 }
