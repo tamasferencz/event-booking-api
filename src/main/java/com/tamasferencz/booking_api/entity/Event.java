@@ -1,5 +1,6 @@
 package com.tamasferencz.booking_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*; // database
 import lombok.AllArgsConstructor;
@@ -25,7 +26,8 @@ public class Event {
     private String name;
     @Schema(description = "Location of the event", example = "Budapest, Heroes' Square")
     private String location;
-    @Schema(description = "Date and time of the event", example = "2026-05-20T14:00:00")
+    @Schema(description = "Date and time of the event",type = "string", example = "2026-05-20 14:00")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime date;
     @Schema(description = "Total number of seats available", example = "100")
     private int totalSeats;

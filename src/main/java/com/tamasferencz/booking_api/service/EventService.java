@@ -5,6 +5,8 @@ import com.tamasferencz.booking_api.repository.EventRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +62,19 @@ public class EventService {
 
         if(event.isEmpty()){
             throw new EventNotFound("Event with location %s not found!".formatted(location));
+        }
+
+        return event;
+    }
+
+    public List<Event> getEventsBetweenDates(LocalDate startDate, LocalDate endDate){
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        var event = eventRepository.findByDateBetween(startDateTime, endDateTime);
+
+        if(event.isEmpty()){
+            throw new EventNotFound("Event with dates starts at %s and ends with %s not found!".formatted(startDate,endDate));
         }
 
         return event;

@@ -7,10 +7,12 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,6 +126,27 @@ public class EventController {
 
         Optional<Event> events = eventService.getEventsByLocation(location);
 
+        return ResponseEntity.ok(events);
+    }
+
+    // --- 7. FIND BY DATES (GET) ---
+    @Operation(
+            summary = "Get events between dates",
+            description = "Retrieves a list of events happening between a specified start and end date."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of events retrieved successfully (can be empty if none found)")
+    })
+    @GetMapping("/searchByDate")
+    public ResponseEntity<List<Event>> getEventsBetweenDates(
+
+            @Parameter(description = "Start date (Format: YYYY-MM-DD)", example = "2026-05-01")
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+
+            @Parameter(description = "End date (Format: YYYY-MM-DD)", example = "2026-05-31")
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
+
+        List<Event> events = eventService.getEventsBetweenDates(start, end);
         return ResponseEntity.ok(events);
     }
 }
